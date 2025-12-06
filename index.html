@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuartos y Departamentos Maestro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f7f7;
+        }
+        
+        .card-shadow {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* ESTILO PARA EL CONTENEDOR DEL MAPA (Mantiene la altura de 400px) */
+        
+        .map-container {
+            height: 400px;
+            width: 100%;
+            border-radius: 0.75rem;
+            margin-bottom: 24px;
+            overflow: hidden;
+            /* Para asegurar que el iframe respete el border-radius */
+        }
+    </style>
+</head>
+
+<body class="text-gray-800">
+
+    <nav class="bg-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex-shrink-0">
+                    <a href="#inicio" class="text-2xl font-bold text-blue-600">Departamentos Maestro</a>
+                </div>
+                <div class="flex space-x-2 sm:space-x-4">
+                    <button class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition duration-150" data-section="inicio">Inicio</button>
+                    <button class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition duration-150" data-section="cuartos">Cuartos</button>
+                    <button class="nav-link px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition duration-150" data-section="departamentos">Departamentos</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+
+        <section id="inicio" class="section-content">
+            <div class="bg-white p-8 rounded-xl card-shadow">
+                <h1 class="text-4xl font-extrabold text-blue-700 mb-4">¡Bienvenido a Departamentos del Meaestro en Tulyehualco!</h1>
+                <p class="text-lg text-gray-600 mb-6">Encuentra el lugar perfecto para vivir en Olivar Santa María, Tulyehualco. Ofrecemos una variedad de cuartos y departamentos que se adaptan a tus necesidades y presupuesto.</p>
+
+                <div class="mb-6">
+                    <h2 class="text-3xl font-bold text-blue-700 mb-4 border-b pb-2">Ubicación del Sitio 📍</h2>
+                    <p class="text-gray-600 mb-4">Dirección: Monte Alegre 62, Olivar de Santa María, Tláhuac, 13546 Ciudad de México.</p>
+                    <div class="map-container card-shadow">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1883.507134435188!2d-99.0139082!3d19.2382099!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85ce1b006d272ec3%3A0x175c2b2a9c3c9ce9!2sDepartamentos%20del%20Maestro!5e0!3m2!1ses!2smx!4v1764983342918!5m2!1ses!2smx"
+                            class="w-full h-full" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-600">
+                        <h2 class="text-xl font-semibold text-blue-700">Comodidad y Servicios Incluidos</h2>
+                        <p class="mt-2 text-gray-600">Todas nuestras unidades incluyen luz, agua e Internet en la renta (consultar la descripción de cada unidad para detalles específicos).</p>
+                    </div>
+                    <div class="p-4 bg-green-50 rounded-lg border-l-4 border-green-600">
+                        <h2 class="text-xl font-semibold text-green-700">Ubicación Estratégica</h2>
+                        <p class="mt-2 text-gray-600">Estamos cerca de la parada de combis de Moisés Camacho. Un lugar tranquilo y seguro para ti.</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-600">
+                    <h2 class="text-xl font-semibold text-yellow-700">Nota Importante</h2>
+                    <p class="mt-2 text-gray-600">Para agendar una cita o pedir más información, haz clic en el botón de WhatsApp (con el ícono 🟢) de la unidad que te interesa. El mensaje incluirá el ID para una respuesta más rápida.</p>
+                    <p class="mt-2 text-gray-600 font-bold">Haz clic en la imagen principal de cada propiedad para ver más fotos detalladas en Google Fotos.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cuartos" class="section-content hidden">
+            <h1 class="text-3xl font-bold text-blue-700 mb-6 border-b pb-2">Cuartos</h1>
+
+            <h2><b>Pulse sobre las imagenes para ver el catalogo de imagenes más detalladas</b></h2>
+            <div id="cuartos-container" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <p class="text-center text-gray-500 col-span-full" id="loading-cuartos">Cargando propiedades...</p>
+            </div>
+        </section>
+
+        <section id="departamentos" class="section-content hidden">
+            <h1 class="text-3xl font-bold text-blue-700 mb-6 border-b pb-2">Departamentos</h1>
+
+            <h2><b>Pulse sobre las imagenes para ver el catalogo de imagenes más detalladas</b></h2>
+
+
+            <div id="departamentos-container" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                <p class="text-center text-gray-500 col-span-full" id="loading-departamentos">Cargando propiedades...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-800 text-white p-4 mt-8">
+        <div class="max-w-7xl mx-auto text-center text-sm">
+            © 2025 Departamentos del Maestro. Todos los derechos reservados.Realizado por Ing. Jonathan Emmanuel Hernández Ortiz.
+        </div>
+    </footer>
+
+
+    <script>
+        // --- 0. CONFIGURACIÓN GLOBAL ---
+        // Número de WhatsApp (base 10 dígitos)
+        const BASE_WHATSAPP_NUMBER = '5536320979';
+        // Número de WhatsApp en formato internacional (521 + 10 dígitos) para el enlace
+        const WHATSAPP_LINK_NUMBER = '521' + BASE_WHATSAPP_NUMBER;
+
+        // =================================================================
+        // A. DEPARTAMENTOS
+        // (Datos no modificados, solo para referencia)
+        // =================================================================
+        const departamentosData = [{
+            id: 'dep1',
+            type: 'Departamento',
+            maxPersons: '1-3',
+            priceFurnished: 3900.00,
+            priceUnfurnished: 3700.00,
+            available: false,
+            description: '🟢 Se Renta departamento AMUEBLADO 🟢 ⛔ Sin Estacionamiento 💥 Leer descripción completa ❗ ❗ Ubicado en Olivar Santa María, Tulyehualco donde llegan las combis de Moisés Camacho Dos cuartos corridos y uino adicional como cocina, baño adentro con acabados y azulejo: ✅ Cuenta con todos los servicios luz, agua e Internet incluido ✅ Cuenta con calentador solar ☀️ ✅ Centro de lavado ✅ Patio frente al departamento ✅ Lugar tranquilo y seguro ✅ 15 días adicionales para dar el deposito ⛔ Sin mascota ❗ Personas tranquila, serías y REALMENTE INTERESADAS',
+            mainImageURL: './dep1.jpeg',
+            googlePhotosURL: 'https://photos.app.goo.gl/vJqkgoxZk3UCwhzH9'
+        }, {
+            id: 'dep2',
+            type: 'Departamento',
+            maxPersons: '1-3',
+            priceFurnished: 3500.00,
+            priceUnfurnished: 3300.00,
+            available: false,
+            description: '🟢 Se Renta departamento AMUEBLADO 🟢 Departamento con 1 cuarto en tira de 4x4, cocina de 3x2 y baño completo ⛔ Sin Estacionamiento 💥 Leer descripción completa ❗ ❗ Ubicado en Olivar Santa María, Tulyehualco donde llegan las combis de Moisés Camacho ✅ Cuenta con todos los servicios luz, agua e Internet incluido ✅ Cuenta con calentador solar conectado al baño ☀️ ✅ Centro de lavado ✅ Patio frente al departamento ✅ Lugar tranquilo y seguro ✅ 15 días adicionales para dar el deposito ⛔ Sin mascota ❗ Personas tranquila, serías y REALMENTE INTERESADAS',
+            mainImageURL: './dep2.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/9XFWELtkyhACYSv86'
+        }, {
+            id: 'casasola',
+            type: 'Departamento',
+            maxPersons: '1-3',
+            priceFurnished: 3000.00,
+            priceUnfurnished: 3000.00,
+            available: false,
+            description: 'Casa Sola/Estudio Amplio. Cuarto de 4x3m con baño adentro. Entrada totalmente independiente. Renta incluye luz, agua e Internet. No mascotas. Actualmente No Disponible. (Información extraída de la tabla para esta unidad).',
+            mainImageURL: './casasola.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/EJEMPLO_CASASOLA'
+        }, ];
+
+        // =================================================================
+        // B. CUARTOS
+        // (Datos no modificados, solo para referencia)
+        // =================================================================
+        const cuartosData = [{
+            id: 'cuarto1',
+            type: 'Cuarto',
+            maxPersons: '1-2',
+            priceFurnished: 2800.00,
+            priceUnfurnished: 2600.00,
+            available: false,
+            description: '2 Cuarto de 4x3 mts aprox ❗ Amueblado o Sin Amueblar ❗ Ubicado en la colonia Olivar Santa María, donde llegan las combis de Moisés Camacho, tiene baño independiente afuera, el baño es un baño completo, calentador solar 💥 , 🟢 Amueblado,le entrego : ✅ Cama ✅ Ropero ✅ Mesa ✅ Bancos ✅ Estufa y tanque de gas (préstamo del cilindro) 💥 Cuenta con luz, agua e Internet incluidos en la renta, es decir, es un pago único mensual.Depósito : 15 días máximo para cubrirlo del mismo valor de la renta.',
+            mainImageURL: './cuarto1.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/psF1uEiLDo7MnGS26'
+        }, {
+            id: 'cuarto2',
+            type: 'Cuarto',
+            maxPersons: '1-2',
+            priceFurnished: 2300.00,
+            priceUnfurnished: 2100.00,
+            available: false,
+            description: 'Mire tengo este cuarto de 3x4 mts aprox, ubicado en la colonia Olivar Santa María, donde llegan las combis de Moisés Camacho, tiene baño independiente afuera, el baño es un baño completo conectado a calentador solar 💥 , tasa por descarga, le entrego si es amueblado: ✅ Cama ✅ Ropero ✅ Mesa ✅ Bancos ✅ Sillón Y no tengo por el momento a la mano, pero le puedo conseguir tanque de gas y estufa Cuenta con luz, agua e Internet incluidos en la renta, es decir, es un pago único mensual.Se le dan 15 días máximo para cubrirlo',
+            mainImageURL: './cuarto2.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/xHkRoakmTYBZfdWZ6'
+        }, {
+            id: 'cuarto3',
+            type: 'Cuarto',
+            maxPersons: '1-2',
+            priceFurnished: 2700.00,
+            priceUnfurnished: 2700.00,
+            available: false,
+            description: 'Mire tengo este cuarto de 4x4 mts aprox, ubicado en la colonia Olivar Santa María, donde llegan las combis de Moisés Camacho, tiene baño independiente ubicado ADENTRO del cuarto, es un baño completo conectado a calentador solar 💥 , tasa por descarga, le entrego si es amueblado: ✅ Cama ✅ Ropero ✅ Mesa ✅ Bancos Y no tengo por el momento a la mano, pero le puedo conseguir tanque de gas y estufa Cuenta con luz, agua e Internet incluidos en la renta, es decir, es un pago único mensual.Se le dan 15 días máximo para cubrirlo',
+            mainImageURL: './cuarto3.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/bpDhBULsbPiYi8wS6'
+        }, {
+            id: 'cuarto4',
+            type: 'Cuarto',
+            maxPersons: '1-2',
+            priceFurnished: 2500.00,
+            priceUnfurnished: 2300.00,
+            available: false,
+            description: 'Cuarto de 3x4 mts aprox, ubicado en la colonia Olivar Santa María, donde llegan las combis de Moisés Camacho, tiene baño independiente afuera, el baño es un baño completo forrado de azulejo, calentador solar 💥 , tasa por descarga, ese en las foto no está del todo amueblado,le entrego : ✅ Cama ✅ Ropero ✅ Mesa ✅ Bancos ✅ Sillón Cuenta con luz, agua incluidos en la renta, es decir, es un pago único mensual.La renta amueblado es de 2500 y un deposito del mismo valor, pero del deposito, le doy 15 días máximo para cubrirlo',
+            mainImageURL: './cuarto4.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/K68RNsWjnZLB8er18'
+        }, {
+            id: 'cuarto5',
+            type: 'Cuarto',
+            maxPersons: '1-2',
+            priceFurnished: 1800.00,
+            priceUnfurnished: 1600.00,
+            available: false,
+            description: 'Mire tengo este cuarto de 4x3 mts aprox, ubicado en la colonia Olivar Santa María, donde llegan las combis de Moisés Camacho, tiene baño independiente afuera del cuarto, tasa por descarga, le entrego si es amueblado: ✅ Cama ✅ Ropero ✅ Mesa ✅ Bancos Y no tengo por el momento a la mano, pero le puedo conseguir tanque de gas y estufa Cuenta con luz, agua e Internet incluidos en la renta, es decir, es un pago único mensual.Se le dan 15 días máximo para cubrirlo',
+            mainImageURL: './cuarto5.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/Wri7LxMe1XdpeoYHA'
+        }, {
+            id: 'cuarto6',
+            type: 'Cuarto',
+            maxPersons: '1-2',
+            priceFurnished: 2500.00,
+            priceUnfurnished: 2300.00,
+            available: false,
+            description: 'Mire tengo este cuarto de 4x5 mts aprox, ubicado en la colonia Olivar Santa María, donde llegan las combis de Moisés Camacho, tiene baño independiente ubicado ADENTRO del cuarto, es un baño completo conectado a calentador solar 💥 , tasa por descarga, le entrego si es amueblado: ✅ Cama ✅ Ropero ✅ Mesa ✅ Bancos Y no tengo por el momento a la mano, pero le puedo conseguir tanque de gas y estufa Cuenta con luz, agua e Internet incluidos en la renta, es decir, es un pago único mensual.Se le dan 15 días máximo para cubrirlo',
+            mainImageURL: './cuarto6.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/YewRa6GZjW7XGBqT9'
+        }, {
+            id: 'cuarto7',
+            type: 'Cuarto',
+            maxPersons: '1-2',
+            priceFurnished: 2300.00,
+            priceUnfurnished: 2300.00,
+            available: false,
+            description: 'Mire tengo este cuarto de LAMINA, de 4x5 mts aprox, ubicado en la colonia Olivar Santa María, donde llegan las combis de Moisés Camacho, tiene baño independiente ubicado Afuera del cuarto le entrego si es amueblado: ✅ Cama ✅ Ropero ✅ Mesa ✅ Bancos Y no tengo por el momento a la mano, pero le puedo conseguir tanque de gas y estufa Cuenta con luz, agua e Internet incluidos en la renta, es decir, es un pago único mensual.Se le dan 15 días máximo para cubrirlo',
+            mainImageURL: './cuarto7.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/Y4HMnuw1Tiqvi5sK6'
+        }, {
+            id: 'cuarto8',
+            type: 'Cuarto',
+            maxPersons: '1',
+            priceFurnished: 1500.00,
+            priceUnfurnished: 1300.00,
+            available: false,
+            description: 'Cuarto para Masculino Miré es un cuarto más o menos de 3x3, ubicado en la Colonia olivar Santa María Tulyehualco, en el predio únicamente hay dos cuartos y como se encuentra un masculino 🚹 por seguridad queremos meter a otro masculino. El cuarto está como en las imágenes y cuenta con los servicios de luz agua e Internet. Estos servicios ya van incluidos en la renta como pago único de 1400 pesos mensuales. Y le doy 15 días como máximo para cubrir el depósito. Buscamos gente tranquila y seria con ambiente tranquilo. Se encuentra disponible a partir del día de hoy y si a usted le interesa lo puede ir a ver personalmente. Amueblado incluye: ✅ Cama ✅ Ropero ✅ Sillon ✅ Mesa ✅ Acesorios adicionales',
+            mainImageURL: './cuarto8.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/whH7fiFUYwPVU1yL6'
+        }, {
+            id: 'cuarto9',
+            type: 'Cuarto',
+            maxPersons: '1',
+            priceFurnished: 1500.00,
+            priceUnfurnished: 1300.00,
+            available: true,
+            description: 'Cuarto para Masculino Miré es un cuarto más o menos de 3x3, ubicado en la Colonia olivar Santa María Tulyehualco, en el predio únicamente hay dos cuartos y como se encuentra un masculino 🚹 por seguridad queremos meter a otro masculino. El cuarto está como en las imágenes y cuenta con los servicios de luz agua e Internet. Estos servicios ya van incluidos en la renta como pago único de 1400 pesos mensuales. Y le doy 15 días como máximo para cubrir el depósito. Buscamos gente tranquila y seria con ambiente tranquilo. Se encuentra disponible a partir del día de hoy y si a usted le interesa lo puede ir a ver personalmente. Amueblado incluye: ✅ Cama ✅ Ropero ✅ Sillon ✅ Mesa ✅ Acesorios adicionales',
+            mainImageURL: './cuarto9.jpg',
+            googlePhotosURL: 'https://photos.app.goo.gl/CR57qM3nJFne2VPA6'
+        }, ];
+
+        // --- C. UNIFICACIÓN DE DATOS (NO MODIFICAR) ---
+        const propertiesData = [...departamentosData, ...cuartosData];
+
+
+        // --- 1. FUNCIONES DE INTERFAZ Y RENDERIZADO ---
+
+        /**
+         * Genera el HTML para una tarjeta de propiedad con enlace en la imagen.
+         */
+        function createPropertyCard(prop) {
+            const isAvailable = prop.available;
+            const statusClass = isAvailable ? 'bg-green-500' : 'bg-red-500';
+            const statusText = isAvailable ? 'Disponible' : 'No Disponible';
+
+            const whatsappMessage = `Hola, me interesa agendar una cita para ver la unidad con ID ${prop.id.toUpperCase()}, que vi en su página web. ¿Está aún disponible?`;
+            const whatsappLink = `https://wa.me/${WHATSAPP_LINK_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
+
+            // Formateo de precios
+            const priceUnfurnished = prop.priceUnfurnished ? `$${prop.priceUnfurnished.toLocaleString('es-MX')} SIN AMUEBLAR` : 'No aplica';
+            const priceFurnished = prop.priceFurnished ? `$${prop.priceFurnished.toLocaleString('es-MX')} AMUEBLADO` : 'No aplica';
+
+            const shortDescriptionLength = 150;
+            const fullDescription = prop.description;
+            const shortDescription = fullDescription.length > shortDescriptionLength ?
+                fullDescription.substring(0, shortDescriptionLength).trim() + '...' :
+                fullDescription;
+
+            return `
+                <div class="bg-white rounded-xl overflow-hidden card-shadow hover:shadow-xl transition duration-300 flex flex-col">
+                    <a href="${prop.googlePhotosURL}" target="_blank" rel="noopener noreferrer"
+                        title="Ver más fotos detalladas en Google Fotos">
+                        <img src="${prop.mainImageURL}"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/94A3B8/ffffff?text=Click+para+Fotos+(${prop.id.toUpperCase()}+.jpeg)';this.alt='Imagen no encontrada: ${prop.id.toUpperCase()}.jpeg';"
+                             alt="${prop.type} ID ${prop.id}"
+                             class="w-full h-48 object-cover cursor-pointer hover:opacity-90 transition duration-300">
+                    </a>
+
+                    <div class="p-5 flex flex-col flex-grow">
+                        <div class="flex justify-between items-start mb-3">
+                            <h2 class="text-2xl font-bold text-blue-800">${prop.type} #${prop.id.toUpperCase()}</h2>
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full text-white ${statusClass}">
+                                ${statusText} ${isAvailable ? '🟢' : '🔴'}
+                            </span>
+                        </div>
+
+                        <p class="text-sm text-gray-500 mb-2">Máximo Personas: <span class="font-semibold">${prop.maxPersons}</span></p>
+
+                        <div class="mb-4">
+                            <p class="font-bold text-lg text-gray-700">${priceFurnished}</p>
+                            <p class="font-normal text-md text-gray-600">${priceUnfurnished}</p>
+                        </div>
+
+                        <div class="text-gray-700 text-sm mb-4 flex-grow">
+                            <p id="desc-short-${prop.id}">${shortDescription}</p>
+                            <span id="desc-full-${prop.id}" class="hidden">${fullDescription}</span>
+                            ${fullDescription.length > shortDescriptionLength ?
+                                `<button onclick="toggleDescription('${prop.id}')" id="btn-toggle-${prop.id}" class="text-blue-600 hover:text-blue-800 font-semibold mt-1">
+                                    Leer más
+                                </button>`
+                                : ''
+                            }
+                        </div>
+
+                        ${isAvailable ? `
+                            <a href="${whatsappLink}" target="_blank" class="mt-auto inline-flex items-center justify-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded-lg transition duration-300 shadow-md transform hover:scale-[1.01]">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12.04 2c-5.54 0-10 4.46-10 10 0 1.77.46 3.48 1.34 5.01l-1.4 5.27 5.48-1.37c1.55.77 3.32 1.18 5.06 1.18 5.54 0 10-4.46 10-10 0-5.54-4.46-10-10-10zm4.27 12.87c-.12.35-.47.88-.98 1.05-.51.17-1.04.18-1.57.06-.6-.13-1.16-.36-1.66-.68s-1.04-.76-1.48-1.29c-.44-.53-.8-1.18-1.02-1.92s-.27-1.5-.13-2.3c.13-.8.47-1.48.98-1.99s1.17-.79 1.94-.85c.19-.01.4-.01.62-.01.44 0 .76.12 1.06.82.31.7.94 2.22 1.02 2.37.08.15.12.36.03.54s-.37.52-.75.94c-.38.42-.8.89-1.24 1.34s-.91.78-1.39 1.11c-.48.33-.94.5-1.42.5-.23 0-.46-.07-.66-.17-.2-.1-.36-.26-.5-.45s-.28-.35-.42-.53c-.14-.18-.3-.32-.47-.42c-.17-.1-.36-.14-.58-.14-.2 0-.41.05-.62.15s-.4.27-.58.46c-.18.19-.32.41-.42.66s-.13.52-.13.82.04.6.13.84c.09.24.23.47.4.67s.38.35.6.49c.22.14.47.23.74.27s.55.03.82-.08c.27-.11.53-.3.77-.57s.45-.63.62-1.07c.17-.44.27-1.01.32-1.7zm1.14 1.13c-.11.19-.24.34-.4.45s-.33.2-.55.26c-.22.06-.44.07-.66.02s-.44-.14-.62-.31c-.19-.18-.34-.4-.45-.66s-.17-.55-.17-.85c0-.3.06-.59.17-.86s.25-.5.44-.66c.19-.17.4-.3.62-.38s-.44-.1.66-.08c.22.02.44.09.62.2s.34.25.45.44c.12.19.18.4.18.63 0 .22-.06.44-.18.63s-.29.34-.5.45c-.21.11-.45.16-.69.16-.24 0-.48-.06-.7-.18s-.42-.29-.56-.51c-.14-.22-.24-.46-.28-.73s-.03-.54.08-.81c.11-.27.28-.52.5-.72s.47-.36.75-.47c.28-.11.57-.14.86-.07s.57.23.79.46c.22.23.38.5.47.8s.13.62.11.95c-.01.33-.09.66-.23.97s-.36.6-.62.83c-.26.23-.55.4-8.87.5z" fill="white"/></svg>
+                                ¡Agendar Cita! ID: ${prop.id.toUpperCase()}
+                            </a>
+                        ` : `
+                            <button disabled class="mt-auto w-full py-2 bg-gray-400 text-white font-bold rounded-lg cursor-not-allowed">
+                                No Disponible
+                            </button>
+                        `}
+                    </div>
+                </div>
+            `;
+        }
+
+        /**
+         * Alterna entre la descripción corta y la completa.
+         */
+        function toggleDescription(id) {
+            const shortDesc = document.getElementById(`desc-short-${id}`);
+            const fullDesc = document.getElementById(`desc-full-${id}`);
+            const toggleBtn = document.getElementById(`btn-toggle-${id}`);
+
+            if (shortDesc.classList.contains('hidden')) {
+                // Mostrar corto
+                shortDesc.classList.remove('hidden');
+                fullDesc.classList.add('hidden');
+                toggleBtn.textContent = 'Leer más';
+            } else {
+                // Mostrar completo
+                shortDesc.classList.add('hidden');
+                fullDesc.classList.remove('hidden');
+                toggleBtn.textContent = 'Ver menos';
+            }
+        }
+
+        /**
+         * Renderiza las propiedades en su contenedor.
+         */
+        function renderProperties(type, containerId) {
+            const container = document.getElementById(containerId);
+            container.innerHTML = '';
+
+            // Filtra los datos desde la lista unificada
+            const filteredData = propertiesData.filter(prop => prop.type === type);
+
+            if (filteredData.length === 0) {
+                container.innerHTML = `<p class="text-center text-gray-500 col-span-full">No hay ${type.toLowerCase()}s listados en este momento.</p>`;
+                return;
+            }
+
+            filteredData.forEach(prop => {
+                container.innerHTML += createPropertyCard(prop);
+            });
+        }
+
+        /**
+         * Manejador de navegación para mostrar/ocultar secciones
+         */
+        function handleNavigation() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.section-content');
+
+            // Mostrar la sección de inicio por defecto al cargar
+            const defaultSection = document.getElementById('inicio');
+            if (defaultSection) {
+                defaultSection.classList.remove('hidden');
+            }
+
+            // Ocultar todas las secciones al principio (excepto la de inicio)
+            sections.forEach(section => {
+                if (section.id !== 'inicio') {
+                    section.classList.add('hidden');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const targetSectionId = e.target.getAttribute('data-section');
+
+                    // Ocultar todas las secciones
+                    sections.forEach(section => {
+                        section.classList.add('hidden');
+                    });
+
+                    // Mostrar la sección de destino
+                    const targetSection = document.getElementById(targetSectionId);
+                    if (targetSection) {
+                        targetSection.classList.remove('hidden');
+                    }
+                });
+            });
+        }
+
+        // --- 2. INICIALIZACIÓN DE LA APLICACIÓN ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Renderizar las propiedades
+            renderProperties('Cuarto', 'cuartos-container');
+            renderProperties('Departamento', 'departamentos-container');
+
+            // Eliminar mensajes de carga
+            const loadingCuartos = document.getElementById('loading-cuartos');
+            const loadingDepartamentos = document.getElementById('loading-departamentos');
+            if (loadingCuartos) loadingCuartos.remove();
+            if (loadingDepartamentos) loadingDepartamentos.remove();
+
+            // Configurar la navegación
+            handleNavigation();
+        });
+
+        // Exponer las funciones globalmente para que funcionen los eventos
+        window.toggleDescription = toggleDescription;
+    </script>
+</body>
+
+</html>
